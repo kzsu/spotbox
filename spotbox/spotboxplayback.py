@@ -90,7 +90,10 @@ class PygletPlayback(Playback):
     def stop(self):
         for spot_number, player in self.players.iteritems():
             player.pause()
-            player.seek(0)
+
+            # Need to check to avoid OpenGL access exception (ugh)
+            if player._get_time() > 0:
+                player.seek(0.0)
 
     def load(self, spotnumber, filepath):
         import pyglet
