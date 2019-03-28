@@ -2,8 +2,9 @@
 
 """SPOTBOX media playback backend"""
 
-# Note-- non-iTunes mode is not yet fully implemented.
+import os
 
+from spotboxconfig import folder_configuration
 
 class Playback:
     """A playback object, allows for audio files to be loaded, played back,
@@ -74,28 +75,35 @@ class iTunesPlayback(Playback):
 
 
 class PygletPlayback(Playback):
+    """Provide playback support using the Pyglet library.
+
+    See https://bitbucket.org/pyglet/pyglet/overview"""
 
     def __init__(self):
-        import pyglet
-        self.playerarray = []
+        self.players = {}
 
     def initialize_one_player(self, spotnumber):
-        pygplayer = self.pyglet.media.Player()
-        self.playerarray.append(pygplayer)
+        import pyglet
+        pygplayer = pyglet.media.Player()
+        self.players[spotnumber] = pygplayer
 
     def stop(self):
-        for player in self.playerarray:
+        for spot_number, player in self.players.iteritems():
             player.pause()
 
     def load(self, spotnumber, filepath):
+        import pyglet
         # at moment, throws "NOT A WAVE" exception, even for .wav
         print filepath
-        media = self.pyglet.media.load(filepath, streaming=False)
-        del self.playerarray[spotnumber]
-        self.playerarray[spotnumber].queue(media)
+        media = pyglet.media.load(os.path.join(folder_configuration['MEDIADIRECTORY'], filepath))
+
+        self.initialize_one_player(spotnumber)
+        self.players[spotnumber].queue(media)
+        return True
 
     def play(self, spotnumber):
-        self.playerarray[spotnumber].play()
+        self.players[spotnumber].play()
+
 
 if __name__ == '__main__':
     pass

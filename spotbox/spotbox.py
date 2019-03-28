@@ -39,6 +39,6 @@ if __name__ == '__main__':
         playback = sbplayback.iTunesPlayback()
     else:
         # this class does nothing for load/play/stop/etc, just pass for each
-        playback = sbplayback.Playback()
+        playback = sbplayback.PygletPlayback()
     spotboxgui = SpotboxTkInterface(configuration, datasheets, playback)
     spotboxgui.run_continuously()
