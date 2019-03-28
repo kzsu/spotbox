@@ -81,10 +81,16 @@ class PygletPlayback(Playback):
 
     def __init__(self):
         self.players = {}
+        self.media = {}
 
     def initialize_one_player(self, spotnumber):
         import pyglet
         pygplayer = pyglet.media.Player()
+
+        if spotnumber in self.players:
+            # Make sure to free up queues and player resources
+            self.players[spotnumber].delete()
+
         self.players[spotnumber] = pygplayer
 
     def stop(self):
@@ -92,21 +98,28 @@ class PygletPlayback(Playback):
             player.pause()
 
             # Need to check to avoid OpenGL access exception (ugh)
-            if player._get_time() > 0:
+            if player.time > 0:
                 player.seek(0.0)
 
     def load(self, spotnumber, filepath):
         import pyglet
         # at moment, throws "NOT A WAVE" exception, even for .wav
-        print filepath
-        media = pyglet.media.load(os.path.join(folder_configuration['MEDIADIRECTORY'], filepath))
+        self.media[spotnumber] = pyglet.media.load(os.path.join(folder_configuration['MEDIADIRECTORY'], filepath))
 
-        self.initialize_one_player(spotnumber)
-        self.players[spotnumber].queue(media)
         return True
 
     def play(self, spotnumber):
-        self.players[spotnumber].play()
+        player = self.players[spotnumber]
+
+        if player.source is None:
+            # re-enqueue media
+            player.queue(self.media[spotnumber])
+
+        if player.time > 0:
+            # play from beginning
+            player.seek(0)
+
+        player.play()
 
 
 if __name__ == '__main__':
