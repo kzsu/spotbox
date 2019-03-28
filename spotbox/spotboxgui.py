@@ -158,6 +158,8 @@ class LoadAndPlayButtons(tk.Frame):
                 self._menus.filetimetoload)
 
     def _playspot(self, spotnumber):
+        self._stop()
+
         self._playback.play(spotnumber)
         countdowntostart = self.countdownarray[spotnumber]
         for countdown in self.countdownarray:
