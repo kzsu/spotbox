@@ -7,6 +7,25 @@ back short audio tracks.
 
 Written by Mark Mollineaux (2013) <bufordsharkley@gmail.com>
 
+## Installation and running
+
+### Prerequisites
+
+You need the following:
+
+- Python 2.7 and `pip`
+- Recommended: AVBin for playing spotbox files (https://avbin.github.io/AVbin/Download.html)
+
+Use `pip install` to install:
+
+- `pip install pyglet`
+
+### Steps to install
+
+- Download the spotbox code from GitHub (clone or zip)
+- Navigate to the repository
+- Create a shortcut, script, or alias to run `python spotbox.py`.
+
 ## Contributing
 
 Read the [contribution guidelines](./CONTRIBUTING.md) to help out.

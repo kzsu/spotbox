@@ -7,6 +7,10 @@ You need to have:
 - Python 2.7 (for now, sorry 😢) and `pip` installed
 - The `pipenv` tool ([See here for installation instructions](https://pipenv.readthedocs.io/en/latest/install/#installing-pipenv))
 
+You should consider installing:
+
+- Python 3.6 or above (ideally 3.7 or above)
+
 ## Setting up your environment
 
 - Clone this repo
