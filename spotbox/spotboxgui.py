@@ -502,7 +502,6 @@ class Menus(object):
 
     @property
     def filetimetoload(self):
-        return self._timetoload
         return self._datasheets.time_from_filepath(self.filepathtoload)
 
     def update_menus_by_key(self, newkey):
