@@ -6,6 +6,7 @@ from spotboxconfig import SPOTBOX_DIRECTORY, folder_configuration
 
 DEFAULTINDEX = 0  # the menu/buttons that are opened intially:
 NUMBEROFPLAYLISTS = 4  # TODO - in configuration???
+PLAY_ALL_GAP = 1 # seconds in gap between playing spots
 
 
 class Countdown(tk.Label):
@@ -79,6 +80,10 @@ class LoadAndPlayButtons(tk.Frame):
         self._playback = playback
         self._menus = menus
         self.pack()
+
+        self.play_all_button = tk.Button(self,
+                                         text="PLAY ALL",
+                                         command=lambda: self._play_all())
         self.stopbutton = tk.Button(self,
                                     text="STOP",
                                     command=lambda: self._stop())
@@ -87,13 +92,15 @@ class LoadAndPlayButtons(tk.Frame):
                                     fg="red",
                                     command=self._help)
 
-        self.stopbutton.grid(row=0, column=1)
-        self.helpbutton.grid(row=0, column=2)
+        self.play_all_button.grid(row=0, column=1)
+        self.stopbutton.grid(row=0, column=2)
+        self.helpbutton.grid(row=0, column=3)
 
         spottextlist = [tk.StringVar() for x in range(NUMBEROFPLAYLISTS)]
         for text in spottextlist:
             text.set("no file loaded")
         self.countdownarray = []
+        self.spot_durations = [None for _ in range(NUMBEROFPLAYLISTS)]
         for ii in range(NUMBEROFPLAYLISTS):
                 self.loadbutton = tk.Button(self,
                                             text='LOAD' + str(ii+1),
@@ -122,6 +129,31 @@ class LoadAndPlayButtons(tk.Frame):
         #master.bind_all('<Alt_L>', lambda event: self._playplaylist(1))
         #master.bind_all('<Escape>', lambda event: self._playplaylist(2))
         # etc prune to match actual number of playlists
+
+    def _play_all(self):
+        # Stop before starting playback from the top spot number
+        play_queue = [
+            (spot_number, self.spot_durations[spot_number])
+            for spot_number
+            in range(NUMBEROFPLAYLISTS)
+        ]
+
+        def dequeue_and_play(play_queue):
+            self._stop()
+
+            if len(play_queue) == 0:
+                return
+
+            spot_number, duration = play_queue.pop(0)
+
+            if duration is not None:
+                self._playspot(spot_number)
+
+                # Set up a callback to continue playing the queue after the current item
+                # finishes playing
+                self.after((duration + PLAY_ALL_GAP) * 1000, lambda: dequeue_and_play(play_queue))
+
+        dequeue_and_play(play_queue)
 
     def _stop(self):
         self._playback.stop()
@@ -156,6 +188,7 @@ class LoadAndPlayButtons(tk.Frame):
             spottext.set(self._menus.filesubjecttoload)
             self.countdownarray[spotnumber].loadcountdown(
                 self._menus.filetimetoload)
+            self.spot_durations[spotnumber] = self._menus.filetimetoload
 
     def _playspot(self, spotnumber):
         self._playback.play(spotnumber)
@@ -222,7 +255,7 @@ class SearchBox(tk.Frame):
                   self._search()).grid(row=0, column=2)
         tk.Button(self,
                   text="Clear",
-                  command=lambda:
+                command=lambda:
                   self._clear_button_action()).grid(row=0, column=0)
         self._searchstring = tk.StringVar()
         self._searchentry = tk.Entry(self, textvariable=self._searchstring)
