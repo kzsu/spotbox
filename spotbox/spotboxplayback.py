@@ -103,7 +103,8 @@ class PygletPlayback(Playback):
 
     def load(self, spotnumber, filepath):
         import pyglet
-        # at moment, throws "NOT A WAVE" exception, even for .wav
+
+        # To support non-WAV files, you may need to install AVBin (http://avbin.github.io/AVbin)
         self.media[spotnumber] = pyglet.media.load(os.path.join(folder_configuration['MEDIADIRECTORY'], filepath))
 
         return True
