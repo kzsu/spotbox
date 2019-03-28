@@ -90,6 +90,7 @@ class PygletPlayback(Playback):
     def stop(self):
         for spot_number, player in self.players.iteritems():
             player.pause()
+            player.seek(0)
 
     def load(self, spotnumber, filepath):
         import pyglet
