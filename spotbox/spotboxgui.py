@@ -5,7 +5,7 @@ import Tkinter as tk
 from spotboxconfig import SPOTBOX_DIRECTORY, folder_configuration
 
 DEFAULTINDEX = 0  # the menu/buttons that are opened intially:
-NUMBEROFPLAYLISTS = 3  # TODO - in configuration???
+NUMBEROFPLAYLISTS = 4  # TODO - in configuration???
 
 
 class Countdown(tk.Label):
