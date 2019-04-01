@@ -2,6 +2,8 @@
 
 import Tkinter as tk
 
+from spotboxconfig import SPOTBOX_DIRECTORY, folder_configuration
+
 DEFAULTINDEX = 0  # the menu/buttons that are opened intially:
 NUMBEROFPLAYLISTS = 3  # TODO - in configuration???
 
@@ -433,10 +435,8 @@ class Header(object):
         categoryselect = CategorySelect(master, lookuptable, menus, self)
         self.searchbox = SearchBox(master, menus)
 
-        PARENTDIRECTORY = '/Applications/SPOTBOX/'  # pass in config. TODO
-
         # add the graphic...
-        graphicfile = PARENTDIRECTORY + 'spotboxgraphicsmall.gif'
+        graphicfile = folder_configuration['GRAPHICPATH']
         graphic = tk.PhotoImage(file=graphicfile)
         graphicw = tk.Label(master, image=graphic)
         graphicw.image = graphic

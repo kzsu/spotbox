@@ -1,7 +1,17 @@
-KZSU SPOTBOX
-Written by Mark Mollineaux (2013) <bufordsharkley@gmail.com>
+# KZSU Spotbox
+
 AKA "jingle box" AKA "digicart." Software that allows DJs to cue and play
 back short audio tracks.
+
+## Authors
+
+Written by Mark Mollineaux (2013) <bufordsharkley@gmail.com>
+
+## Contributing
+
+Read the [contribution guidelines](./CONTRIBUTING.md) to help out.
+
+## More info
 
 Uses Tkinter front-end, simple python backend, and allows for audio playback
 through iTunes, through appscript, a python wrapper for Applescript. A more
@@ -13,5 +23,5 @@ configured in the filename itself. The menu headers/etc are configured in a
 dict in the spotbox.py file.
 
 Files are loaded statically on startup from the MEDIA folder. Any files that
-need to be queried for updates (for instance, a Dropbox folder containing 
+need to be queried for updates (for instance, a Dropbox folder containing
 newscasts) are given the "polling" designation.

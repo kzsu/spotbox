@@ -1,14 +1,17 @@
+import os
+
 # Directories for files:
-PARENTDIRECTORY = '/Applications/SPOTBOX/'
+# PARENTDIRECTORY = '/Applications/SPOTBOX/'
+SPOTBOX_DIRECTORY = os.path.dirname(os.path.realpath(__file__))
 
 #Configure the folders:
 
-folderconfiguration = {
-                       'MEDIADIRECTORY': PARENTDIRECTORY + 'MEDIA/',
+folder_configuration = {
+                       'MEDIADIRECTORY': os.path.join(SPOTBOX_DIRECTORY, 'MEDIA'),
                        # The os.path.expanduser makes the tilde work as intended (home folder).
                        'DROPBOXDIRECTORY': os.path.expanduser('~/Dropbox/'),
 
-                       'GRAPHICPATH': PARENTDIRECTORY + 'spotboxgraphicsmall.gif'
+                       'GRAPHICPATH': os.path.join(SPOTBOX_DIRECTORY, 'spotboxgraphicsmall.gif')
                       }
 
 # CONFIGURATION:
@@ -38,7 +41,7 @@ configuration = {
                                                   ('Kill', 1),
                                                   ('Added', 1)),
                            'static or polling' : 'static',
-                           'file directory'    : folderconfiguration['MEDIADIRECTORY'],
+                           'file directory'    : folder_configuration['MEDIADIRECTORY'],
                            'filename indices'  : [3, 2, 4, 5, 6, 7, 8],
                            'index timer'       : 2,
                            'index subject'     : 3
@@ -52,7 +55,7 @@ configuration = {
                                                   ('LID Type', 15),
                                                   ('Year', 1)),
                            'static or polling' : 'static',
-                           'file directory'    : folderconfiguration['MEDIADIRECTORY'],
+                           'file directory'    : folder_configuration['MEDIADIRECTORY'],
                            'filename indices'  : [3, 4, 2, 5, 6],
                            'index timer'       : 2,
                            'index subject'     : 3
@@ -68,7 +71,7 @@ configuration = {
                                                   ('Added', 1),
                                                   ('Now?', 1)),
                            'static or polling' : 'static',
-                           'file directory'    : folderconfiguration['MEDIADIRECTORY'],
+                           'file directory'    : folder_configuration['MEDIADIRECTORY'],
                            'filename indices'  : [3, 9, 2, 5, 6, 7, 8],
                            'index timer'       : 2,
                            'index subject'     : 3
@@ -81,7 +84,7 @@ configuration = {
                                                   ('Time', 5),
                                                   ('Type', 25)),
                            'static or polling' : 'static',
-                           'file directory'    : folderconfiguration['MEDIADIRECTORY'],
+                           'file directory'    : folder_configuration['MEDIADIRECTORY'],
                            'filename indices'  : [3, 4, 2, 5],
                            'index timer'       : 2,
                            'index subject'     : 3
@@ -95,7 +98,7 @@ configuration = {
                                                   ('KZSU Show', 16),
                                                   ('KZSU DJ', 15)),
                            'static or polling' : 'static',
-                           'file directory'    : folderconfiguration['MEDIADIRECTORY'],
+                           'file directory'    : folder_configuration['MEDIADIRECTORY'],
                            'filename indices'  : [3, 2, 4, 5, 6],
                            'index timer'       : 2,
                            'index subject'     : 3
@@ -111,7 +114,7 @@ configuration = {
                                                   ('Kill', 1),
                                                   ('Added', 1)),
                            'static or polling' : 'static',
-                           'file directory'    : folderconfiguration['MEDIADIRECTORY'],
+                           'file directory'    : folder_configuration['MEDIADIRECTORY'],
                            'filename indices'  : [3, 2, 4, 5, 6, 7, 8],
                            'index timer'       : 2,
                            'index subject'     : 3
@@ -122,7 +125,7 @@ configuration = {
                            'menu headers'      : (('Newscast for Today', 100),
                                                   ('Time', 20)),
                            'static or polling' : 'polling',
-                           'file directory'    : folderconfiguration['DROPBOXDIRECTORY'],
+                           'file directory'    : folder_configuration['DROPBOXDIRECTORY'],
                            'filename indices'  : [1, 2],
                            'index timer'       : 2,
                            'index subject'     : 1

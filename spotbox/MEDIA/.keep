@@ -1,0 +1,3 @@
+Placeholder file to check this directory into Git.
+
+The Spotbox currently hardcodes this directory and expects it to exist. Without this directory, the Spotbox will fail to launch.

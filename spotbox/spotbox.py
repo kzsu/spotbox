@@ -28,13 +28,13 @@ ITUNESMODE = False
 import os
 from spotboxdata import DatasheetNotebook
 import spotboxplayback as sbplayback
-from spotboxgui import SpotboxTKInterface
-from spotboxconfig import folderconfiguration, configuration
+from spotboxgui import SpotboxTkInterface
+from spotboxconfig import folder_configuration, configuration
 
 
 if __name__ == '__main__':
     datasheets = DatasheetNotebook()
-    datasheets.update_from_configuration(folderconfiguration, configuration)
+    datasheets.update_from_configuration(folder_configuration, configuration)
     if ITUNESMODE:
         playback = sbplayback.iTunesPlayback()
     else:
