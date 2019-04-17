@@ -174,11 +174,12 @@ class DatasheetNotebook(object):
             return 9999
 
 
-def split_file_name(filename):
+def split_file_name(file_path):
     """Given complete file path, extracts metadata (underscore-separated)"""
     # TODO - don't assume it's a full path: have option for just the file name.
     # Look at only the file, remove file extension, and path:
-    justthefilename = ((filename.rsplit('/', 1))[1]).rsplit('.', 1)[0]
+    filename = os.path.basename(file_path)
+    justthefilename = filename.rsplit('.', 1)[0]
     # the following line just gives it a little extra error protection against
     # user input error:
     justthefilename += '___'
